@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vdb name="DS1SvcVdb" version="1">
+
+
+<model name="SvcModel" type="VIRTUAL">
+<metadata type="DDL">
+<![CDATA[CREATE VIEW SvcView (
+	RowId integer,
+	id long,
+	patientId long,
+	dateRead timestamp,
+	mam boolean,
+	sys long,
+	dia long,
+	pulse long,
+	map long,
+	glucoseType clob,
+	glucoseValue long,
+	glucoseLabel clob,
+	note clob,
+	PRIMARY KEY(RowId)
+)
+AS
+SELECT ROW_NUMBER() OVER (ORDER BY id), id, patientId, dateRead, mam, sys, dia, pulse, map, glucoseType, glucoseValue, glucoseLabel, note FROM READING;
+]]>
+
+</metadata>
+</model>
+<model name="MySqlPatients" type="PHYSICAL">
+<source name="MySqlPatients" translator-name="mysql5" connection-jndi-name="java:/MySqlPatients"/>
+</model>
+
+</vdb>
