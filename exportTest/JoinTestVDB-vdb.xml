@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vdb name="JoinTestVDB" version="1">
+
+
+<model name="views" type="VIRTUAL">
+<metadata type="DDL">
+<![CDATA[CREATE VIEW JoinTestView (
+	RowId integer,
+	SUPPLIER_ID string,
+	PART_ID string,
+	QUANTITY bigdecimal,
+	SHIPPER_ID bigdecimal,
+	SHIPPER_NAME string,
+	PRIMARY KEY(RowId)
+)
+AS
+SELECT ROW_NUMBER() OVER (ORDER BY A.SUPPLIER_ID), A.SUPPLIER_ID, A.PART_ID, A.QUANTITY, A.SHIPPER_ID, B.SHIPPER_NAME FROM SUPPLIER_PARTS AS A INNER JOIN SHIP_VIA AS B ON A.SHIPPER_ID = B.SHIPPER_ID;
+]]>
+
+</metadata>
+</model>
+<model name="PartsOracle" type="PHYSICAL">
+<source name="PartsOracle" translator-name="oracle" connection-jndi-name="java:/PartsOracle"/>
+<metadata type="DDL">
+<![CDATA[CREATE FOREIGN TABLE SUPPLIER_PARTS (
+	SUPPLIER_ID string(10) NOT NULL OPTIONS ("NAMEINSOURCE" '"SUPPLIER_ID"', "NATIVE_TYPE" 'VARCHAR2'),
+	PART_ID string(4) NOT NULL OPTIONS ("NAMEINSOURCE" '"PART_ID"', "NATIVE_TYPE" 'CHAR'),
+	QUANTITY bigdecimal(3) OPTIONS ("NAMEINSOURCE" '"QUANTITY"', "NATIVE_TYPE" 'NUMBER', "CHAR_OCTET_LENGTH" '22'),
+	SHIPPER_ID bigdecimal(2) OPTIONS ("NAMEINSOURCE" '"SHIPPER_ID"', "NATIVE_TYPE" 'NUMBER', "CHAR_OCTET_LENGTH" '22')
+) OPTIONS ("UPDATABLE" 'TRUE', "NAMEINSOURCE" '"SUPPLIER_PARTS"', "CARDINALITY" '212');
+]]>
+
+</metadata>
+</model>
+<model name="PartsSqlServer" type="PHYSICAL">
+<source name="PartsSqlServer" translator-name="sqlserver" connection-jndi-name="java:/PartsSqlServer"/>
+<metadata type="DDL">
+<![CDATA[CREATE FOREIGN TABLE SHIP_VIA (
+	SHIPPER_ID bigdecimal(2) NOT NULL OPTIONS ("NAMEINSOURCE" '"SHIPPER_ID"', "NATIVE_TYPE" 'numeric'),
+	SHIPPER_NAME string(30) OPTIONS ("NAMEINSOURCE" '"SHIPPER_NAME"', "NATIVE_TYPE" 'varchar')
+) OPTIONS ("UPDATABLE" 'TRUE', "NAMEINSOURCE" '"SHIP_VIA"', "CARDINALITY" '3');
+]]>
+
+</metadata>
+</model>
+
+</vdb>
