@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?><dataservice name="JoinTest">
-
-	<description>Joins tables from disparate sources</description>
-
-	<service-vdb-file path="JoinTestVDB-vdb.xml" publish="ifMissing" vdbName="JoinTestVDB" vdbVersion="1">
-	</service-vdb-file>
-
-</dataservice>
