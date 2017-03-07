@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?><dataservice name="TestJoin">
-
-
-	<service-vdb-file path="TestJoinVDB-vdb.xml" publish="ifMissing" vdbName="TestJoinVDB" vdbVersion="1">
-	</service-vdb-file>
-
-</dataservice>

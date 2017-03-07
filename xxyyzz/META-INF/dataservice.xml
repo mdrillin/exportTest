@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?><dataservice name="Parts">
-
-	<description>Easy odata access to parts database table</description>
-
-	<service-vdb-file path="PartsVDB-vdb.xml" publish="ifMissing" vdbName="PartsVDB" vdbVersion="1">
-	</service-vdb-file>
-
-</dataservice>
