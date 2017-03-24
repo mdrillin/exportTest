@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?><dataservice name="Customer">
-
-
-	<service-vdb-file path="CustomerVDB-vdb.xml" publish="ifMissing" vdbName="CustomerVDB" vdbVersion="1">
-	</service-vdb-file>
-
-</dataservice>

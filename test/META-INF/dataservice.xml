@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?><dataservice name="Accounts">
-
-	<description>this service exposes the Accounts table from H2 DB</description>
-
-	<service-vdb-file path="AccountsVDB-vdb.xml" publish="ifMissing" vdbName="AccountsVDB" vdbVersion="1">
-	</service-vdb-file>
-
-</dataservice>
