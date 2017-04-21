@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vdb name="productsVDB" version="1">
+
+<property name="dsbOwner" value="anotherUser"/>
+<property name="dsbTeiidStatus" value="Active"/>
+<property name="dsbTeiidStatusMessage" value="The VDB is Active"/>
+
+<model name="views" type="VIRTUAL">
+<metadata type="DDL">
+<![CDATA[CREATE VIEW productsView (
+	ID integer,
+	SYMBOL string,
+	COMPANY_NAME string,
+	PRIMARY KEY(ID)
+)
+AS
+SELECT ID, SYMBOL, COMPANY_NAME FROM PRODUCT;
+]]>
+
+</metadata>
+</model>
+<model name="H2AccountsSource" type="PHYSICAL">
+<source name="AccountsH2" translator-name="h2" connection-jndi-name="java:/accounts-ds"/>
+<metadata type="DDL">
+<![CDATA[CREATE FOREIGN TABLE PRODUCT (
+	ID integer NOT NULL OPTIONS ("NAMEINSOURCE" '"ID"', "NATIVE_TYPE" 'INTEGER'),
+	SYMBOL string(16) OPTIONS ("NAMEINSOURCE" '"SYMBOL"', "NATIVE_TYPE" 'VARCHAR'),
+	COMPANY_NAME string(256) OPTIONS ("NAMEINSOURCE" '"COMPANY_NAME"', "NATIVE_TYPE" 'VARCHAR')
+) OPTIONS ("UPDATABLE" 'TRUE', "NAMEINSOURCE" '"PRODUCT"');
+]]>
+
+</metadata>
+</model>
+
+</vdb>
