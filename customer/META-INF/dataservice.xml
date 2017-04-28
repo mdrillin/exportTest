@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?><dataservice name="CustomerService">
 
-	<description>Expose the H2 Customer data - user2 made a change</description>
+	<description>Expose the H2 Customer data - dsbUser made a change</description>
 
 	<service-vdb-file path="CustomerServiceVDB-vdb.xml" publish="ifMissing" vdbName="CustomerServiceVDB" vdbVersion="1">
 	</service-vdb-file>
