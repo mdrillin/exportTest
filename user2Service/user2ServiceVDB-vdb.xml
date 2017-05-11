@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vdb name="user2ServiceVDB" version="1">
+
+<property name="dsbOwner" value="user2"/>
+
+<model name="views" type="VIRTUAL">
+<metadata type="DDL">
+<![CDATA[CREATE VIEW user2ServiceView (
+	SSN string,
+	FIRSTNAME string,
+	LASTNAME string,
+	ST_ADDRESS string,
+	APT_NUMBER string,
+	CITY string,
+	STATE string,
+	ZIPCODE string,
+	PHONE string,
+	PRIMARY KEY(SSN)
+)
+AS
+SELECT SSN, FIRSTNAME, LASTNAME, ST_ADDRESS, APT_NUMBER, CITY, STATE, ZIPCODE, PHONE FROM CUSTOMER;
+]]>
+
+</metadata>
+</model>
+<model name="H2Customer" type="PHYSICAL">
+<source name="AccountsH2" translator-name="h2" connection-jndi-name="java:/accounts-ds"/>
+<metadata type="DDL">
+<![CDATA[CREATE FOREIGN TABLE CUSTOMER (
+	SSN string(10) NOT NULL OPTIONS ("NAMEINSOURCE" '"SSN"', "NATIVE_TYPE" 'CHAR'),
+	FIRSTNAME string(64) OPTIONS ("NAMEINSOURCE" '"FIRSTNAME"', "NATIVE_TYPE" 'VARCHAR'),
+	LASTNAME string(64) OPTIONS ("NAMEINSOURCE" '"LASTNAME"', "NATIVE_TYPE" 'VARCHAR'),
+	ST_ADDRESS string(256) OPTIONS ("NAMEINSOURCE" '"ST_ADDRESS"', "NATIVE_TYPE" 'VARCHAR'),
+	APT_NUMBER string(32) OPTIONS ("NAMEINSOURCE" '"APT_NUMBER"', "NATIVE_TYPE" 'VARCHAR'),
+	CITY string(64) OPTIONS ("NAMEINSOURCE" '"CITY"', "NATIVE_TYPE" 'VARCHAR'),
+	STATE string(32) OPTIONS ("NAMEINSOURCE" '"STATE"', "NATIVE_TYPE" 'VARCHAR'),
+	ZIPCODE string(10) OPTIONS ("NAMEINSOURCE" '"ZIPCODE"', "NATIVE_TYPE" 'VARCHAR'),
+	PHONE string(15) OPTIONS ("NAMEINSOURCE" '"PHONE"', "NATIVE_TYPE" 'VARCHAR')
+) OPTIONS ("UPDATABLE" 'TRUE', "NAMEINSOURCE" '"CUSTOMER"');
+]]>
+
+</metadata>
+</model>
+
+</vdb>
