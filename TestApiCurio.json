@@ -17,6 +17,7 @@
   "paths": {
     "/test": {
       "get": {
+        "summary": "summary",
         "description": "test"
       }
     }
