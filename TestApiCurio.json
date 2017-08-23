@@ -3,6 +3,15 @@
   "info": {
     "title": "TestApiCurio",
     "description": "Test the api curio tool",
+    "contact": {
+      "name": "Mark Drilling",
+      "url": "",
+      "email": "mdrilling@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
     "version": "1.0.0"
   },
   "paths": {
@@ -10,6 +19,22 @@
       "get": {
         "description": "test"
       }
+    }
+  },
+  "tags": [
+    {
+      "name": "ATag",
+      "description": "Here is a tag"
+    },
+    {
+      "name": "BTag",
+      "description": "Here is another tag"
+    }
+  ],
+  "securityDefinitions": {
+    "security": {
+      "type": "basic",
+      "description": "security description"
     }
   }
 }
