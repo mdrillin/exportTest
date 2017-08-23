@@ -30,6 +30,10 @@
     {
       "name": "BTag",
       "description": "Here is another tag"
+    },
+    {
+      "name": "xxx",
+      "description": ""
     }
   ],
   "securityDefinitions": {
