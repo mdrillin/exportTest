@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?><dataservice name="tst">
+
+
+	<service-vdb-file path="tstVDB-vdb.xml" publish="ifMissing" vdbName="tstVDB" vdbVersion="1">
+	</service-vdb-file>
+
+</dataservice>

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vdb name="tstVDB" version="1">
+
+<property name="dsbOwner" value="dsbUser"/>
+
+<model name="views" type="VIRTUAL">
+<metadata type="DDL">
+<![CDATA[CREATE VIEW tstView (
+	ACCOUNT_ID integer,
+	SSN string,
+	STATUS string,
+	TYPE string,
+	DATEOPENED timestamp,
+	DATECLOSED timestamp,
+	PRIMARY KEY(ACCOUNT_ID)
+)
+AS
+SELECT ACCOUNT_ID, SSN, STATUS, TYPE, DATEOPENED, DATECLOSED FROM AccountsH2SvcSource.ACCOUNT;
+]]>
+
+</metadata>
+</model>
+<model name="AccountsH2SvcSource" type="PHYSICAL">
+<source name="AccountsH2" translator-name="h2" connection-jndi-name="java:/accounts-ds"/>
+<metadata type="DDL">
+<![CDATA[CREATE FOREIGN TABLE ACCOUNT (
+	ACCOUNT_ID integer NOT NULL OPTIONS ("NAMEINSOURCE" '"ACCOUNT_ID"', "NATIVE_TYPE" 'INTEGER'),
+	SSN string(10) OPTIONS ("NAMEINSOURCE" '"SSN"', "NATIVE_TYPE" 'CHAR'),
+	STATUS string(10) OPTIONS ("NAMEINSOURCE" '"STATUS"', "NATIVE_TYPE" 'CHAR'),
+	TYPE string(10) OPTIONS ("NAMEINSOURCE" '"TYPE"', "NATIVE_TYPE" 'CHAR'),
+	DATEOPENED timestamp OPTIONS ("NAMEINSOURCE" '"DATEOPENED"', "NATIVE_TYPE" 'TIMESTAMP'),
+	DATECLOSED timestamp OPTIONS ("NAMEINSOURCE" '"DATECLOSED"', "NATIVE_TYPE" 'TIMESTAMP')
+) OPTIONS ("UPDATABLE" 'TRUE', "NAMEINSOURCE" '"ACCOUNT"');
+]]>
+
+</metadata>
+</model>
+<data-role name="DefaultReadOnlyDataRole" any-authenticated="true" allow-create-temporary-tables="false" grant-all="false">
+<description>The default read-only access data role.</description>
+<permission>
+<resource-name>views</resource-name>
+<allow-alter>false</allow-alter>
+<allow-create>false</allow-create>
+<allow-delete>false</allow-delete>
+<allow-execute>false</allow-execute>
+<allow-read>true</allow-read>
+<allow-update>false</allow-update>
+</permission>
+<permission>
+<resource-name>AccountsH2</resource-name>
+<allow-alter>false</allow-alter>
+<allow-create>false</allow-create>
+<allow-delete>false</allow-delete>
+<allow-execute>false</allow-execute>
+<allow-read>true</allow-read>
+<allow-update>false</allow-update>
+</permission>
+</data-role>
+
+</vdb>
